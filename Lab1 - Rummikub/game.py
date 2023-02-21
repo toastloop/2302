@@ -12,8 +12,11 @@ class Rummikub:
         self.currentPlayer: Player
         self.validMove = False
         self.gameOver = False
-    def printTilesTable(self):print('Current Table:');[print('\t{}:\t{}'.format(key, self.tilesDeck[key])) for key in self.tilesDeck]
-    def printTurnOptions(self):print('1. Place tile(s) on table\n2. Take a tile from the deck of tiles (ends your turn)\n3. View my tiles')
+    def printTilesTable(self):
+        print('Current Table:');
+        [print('\t{}:\t{}'.format(key, self.tilesDeck[key])) for key in self.tilesDeck]
+    def printTurnOptions(self):
+        print('1. Place tile(s) on table\n2. Take a tile from the deck of tiles (ends your turn)\n3. View my tiles')
     def setupPlayers(self):
         print("Welcome to Rummikub!")
         for i in range(int(input('Input the number of players: '))):
@@ -23,7 +26,10 @@ class Rummikub:
         output=[int(str) if str.isnumeric() else str.lower() for str in tilesStr.split()]
         error=all([type(output[i])!=type(output[i-1]) for i in range(len(output)-1)])
         return output if error else None, None if error else self.errorMessages[0]
-    def placeTilesOnTable(self, tilesList): {self.tilesOnTable[tilesList[i]][1 if tilesList[i+1] in self.tilesOnTable[tilesList[i]][0] else 0].append(tilesList[i+1]) for i in range(0, len(tilesList), 2)}
+    def placeTilesOnTable(self, tilesList):
+        {
+            self.tilesOnTable[tilesList[i]][1 if tilesList[i+1] in self.tilesOnTable[tilesList[i]][0] else 0].append(tilesList[i+1]) for i in range(0, len(tilesList), 2)
+        }
     def takeTileFromTileDeck(self):
         color=str(random.choice(list(self.tilesDeck.keys())))
         num=random.choice([x for x in self.tilesDeck[color][0]+self.tilesDeck[color][1] if x!=0])
